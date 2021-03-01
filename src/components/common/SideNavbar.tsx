@@ -73,7 +73,7 @@ function SideNavbar() {
     const router = useRouter();
 
     useEffect(() => {
-        for (let path in Paths) router.prefetch(Paths[path]);
+        for (let path in Object.values(Paths)) router.prefetch(path);
     }, []);
 
     const handleMenu = (event: React.MouseEvent<HTMLElement>) => {

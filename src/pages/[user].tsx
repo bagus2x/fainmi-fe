@@ -32,12 +32,39 @@ interface UserProps {
     style?: Style;
 }
 
+let dummy = {
+    links: [{ title: 'My Facebook', href: 'http://facebook.com' }],
+    style: {
+        background: {
+            image: '/sign_background.svg',
+            subImage: '/circuit_boarad.svg',
+            name: 'wdw'
+        },
+        button: {
+            image: '/contour_line.svg',
+            name: 'wdwd'
+        },
+        font: {
+            fontFamily: `'Akaya Telivigala', cursive;`,
+            href: `https://fonts.googleapis.com/css2?family=Akaya+Telivigala&display=swap`,
+            name: 'wdwd'
+        }
+    },
+    username: 'bagus'
+};
+
 function User({ profile, links, style }: UserProps) {
     const classes = useStyles();
 
     return (
         <div style={{ display: 'flex', height: '100vh' }}>
-            <Emulator component={React.Fragment} />
+            <Emulator
+                backgroundImage={dummy.style.background.image}
+                backgroundSubImage={dummy.style.background.subImage}
+                buttonImage={dummy.style.button.image}
+                fontFamily={dummy.style.font.fontFamily}
+                fontHref={dummy.style.font.href}
+            />
         </div>
     );
 }

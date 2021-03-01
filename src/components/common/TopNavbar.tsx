@@ -32,7 +32,7 @@ const TopNavbar = () => {
     const matches = useMediaQuery<Theme>((theme) => theme.breakpoints?.up('md'));
 
     useEffect(() => {
-        for (let path in Paths) router.prefetch(Paths[path]);
+        for (let path in Object.values(Paths)) router.prefetch(path);
     }, []);
 
     if (!Object.values(Paths).includes(router.pathname as Paths)) return <React.Fragment />;
