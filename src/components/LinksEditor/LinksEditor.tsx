@@ -10,6 +10,7 @@ import InputLink from '@components/LinkEditor/LinkEditor';
 import { Links, Link } from '@redux/links/types';
 import useDebounce from '@lib/hooks/debounce';
 import { getAccessToken } from '@lib/access-token';
+import LoadingButton from '@components/ui/LoadingButton';
 
 interface SortableLinkProps {
     link: Link;
@@ -42,17 +43,21 @@ const LinksEditor = () => {
         if (data !== null) setLinks(data);
     }, [data]);
 
-    const handleAddNewLink = useDebounce(() => {
-        if (loading) return;
-        dispatch(
-            addLink(getAccessToken() as string, {
-                display: false,
-                order: 0,
-                title: '',
-                url: ''
-            })
-        );
-    }, 1000);
+    const handleAddNewLink = useDebounce(
+        () => {
+            if (loading) return;
+            dispatch(
+                addLink(getAccessToken() as string, {
+                    display: false,
+                    order: 0,
+                    title: '',
+                    url: ''
+                })
+            );
+        },
+        1000,
+        { leading: true }
+    );
 
     const saveOrder = useDebounce((order: Links) => {
         dispatch(updateOrder(getAccessToken() as string, order));
@@ -67,9 +72,9 @@ const LinksEditor = () => {
 
     return (
         <div className={classes.root}>
-            <Button onClick={handleAddNewLink} disableElevation variant="contained" color="secondary" fullWidth>
+            <LoadingButton loading={loading} onClick={handleAddNewLink} disableElevation variant="contained" color="secondary" fullWidth>
                 Add new link
-            </Button>
+            </LoadingButton>
             <SortableLinks distance={1} className={classes.linkWrapper} links={links} onSortEnd={handleOnSortEnd} useDragHandle />
         </div>
     );
