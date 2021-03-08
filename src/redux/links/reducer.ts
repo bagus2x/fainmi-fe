@@ -11,11 +11,15 @@ export default function reducer(state: State = initialState, action: LinksAction
         case 'ADD_LINK_REQUEST':
         case 'GET_LINKS_REQUEST':
         case 'UPDATE_LINK_REQUEST':
-        case 'DELETE_LINK_REQUEST':
             return {
                 ...state,
                 loading: true,
                 error: null
+            };
+        case 'DELETE_LINK_REQUEST':
+            return {
+                ...state,
+                data: state.data!.filter((link) => link.linkID != action.linkID)
             };
         case 'UPDATE_LINK_DISPLAY_REQUEST':
             return {
@@ -49,7 +53,6 @@ export default function reducer(state: State = initialState, action: LinksAction
         case 'DELETE_LINK_SUCCESS':
             return {
                 ...state,
-                data: state.data!.filter((link) => link.linkID != action.linkID),
                 loading: false
             };
         case 'UPDATE_LINK_SUCCESS':

@@ -23,8 +23,8 @@ export type LinksAction =
     | { type: 'ADD_LINK_REQUEST' }
     | { type: 'ADD_LINK_SUCCESS'; link: Link }
     | { type: 'ADD_LINK_FAIL'; error: ErrorDetail }
-    | { type: 'DELETE_LINK_REQUEST' }
-    | { type: 'DELETE_LINK_SUCCESS'; linkID: number }
+    | { type: 'DELETE_LINK_REQUEST'; linkID: number }
+    | { type: 'DELETE_LINK_SUCCESS' }
     | { type: 'DELETE_LINK_FAIL'; error: ErrorDetail }
     | { type: 'UPDATE_LINK_REQUEST' }
     | { type: 'UPDATE_LINK_SUCCESS'; link: Link }

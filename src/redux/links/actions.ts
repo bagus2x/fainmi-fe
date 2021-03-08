@@ -146,7 +146,7 @@ export const updateOrder = (accessToken: string, req: Array<UpdateLinkOrderReque
 };
 
 export const deleteLink = (accessToken: string, linkID: number) => async (dispatch: Dispatch<LinksAction>) => {
-    dispatch({ type: 'DELETE_LINK_REQUEST' });
+    dispatch({ type: 'DELETE_LINK_REQUEST', linkID });
 
     try {
         await axios.delete<Response>(`${API}/api/v1/link/${linkID}`, {
@@ -154,7 +154,7 @@ export const deleteLink = (accessToken: string, linkID: number) => async (dispat
                 Authorization: `Bearer ${accessToken}`
             }
         });
-        dispatch({ type: 'DELETE_LINK_SUCCESS', linkID });
+        dispatch({ type: 'DELETE_LINK_SUCCESS' });
     } catch (err) {
         dispatch({ type: 'DELETE_LINK_FAIL', error: writeError(err, 'Delete link error') });
     }
