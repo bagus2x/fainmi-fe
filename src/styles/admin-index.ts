@@ -7,6 +7,7 @@ const useStyles = makeStyles((theme: Theme) =>
             display: 'flex',
             position: 'relative',
             width: '100%',
+            minHeight: 0,
             padding: theme.spacing(2),
             background: theme.palette.grey[50],
             [theme.breakpoints.down('sm')]: {
@@ -14,7 +15,11 @@ const useStyles = makeStyles((theme: Theme) =>
             }
         },
         linksEditor: {
-            flex: 1
+            flex: 1,
+            overflowY: 'auto',
+            [theme.breakpoints.up('sm')]: {
+                paddingRight: theme.spacing(2)
+            }
         },
         emulator: {
             flex: 1,
