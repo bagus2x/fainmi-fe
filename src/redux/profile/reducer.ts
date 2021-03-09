@@ -10,7 +10,7 @@ export const initialState: State = {
 export default function reducer(state: State = initialState, action: ProfileAction): State {
     switch (action.type) {
         case 'USER_SIGNIN_REQUEST':
-        case 'USER_SIGNIN_REQUEST':
+        case 'USER_SIGNUP_REQUEST':
         case 'GET_PROFILE_REQUEST':
         case 'USER_UPDATE_REQUEST':
         case 'USER_UPDATE_PHOTO_REQUEST':
