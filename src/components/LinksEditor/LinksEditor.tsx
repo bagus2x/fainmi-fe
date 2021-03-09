@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Button from '@material-ui/core/Button';
 import { useDispatch } from 'react-redux';
 import arrayMove from 'array-move';
 import { SortableContainer, SortableElement, SortEndHandler } from 'react-sortable-hoc';
@@ -61,7 +60,7 @@ const LinksEditor = () => {
 
     const saveOrder = useDebounce((order: Links) => {
         dispatch(updateOrder(getAccessToken() as string, order));
-    }, 2500);
+    }, 1000);
 
     const handleOnSortEnd: SortEndHandler = ({ oldIndex, newIndex }) => {
         const value = arrayMove(links, oldIndex, newIndex);
