@@ -1,5 +1,4 @@
 import useStyles from '@styles/signin';
-import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
 import Paper from '@material-ui/core/Paper';
 import TextField from '@material-ui/core/TextField';
@@ -12,6 +11,7 @@ import Link from '@components/ui/Link';
 import { useDispatch } from 'react-redux';
 import { signIn } from '@redux/profile/actions';
 import useProfile from '@lib/hooks/profile';
+import LoadingButton from '@components/ui/LoadingButton';
 
 const Rules: { [key: string]: RegisterOptions } = {
     username: {
@@ -47,13 +47,13 @@ function Signin() {
     const { register, handleSubmit, errors, setError } = useForm<SignInField>();
     const classes = useStyles();
     const dispatch = useDispatch();
-    const { data, error, loading } = useProfile();
+    const { isAuthenticated, error, loading } = useProfile();
 
-    const disabled = !!errors.username || !!errors.password || loading || !!data;
+    const disabled = !!errors.username || !!errors.password || loading || !!isAuthenticated;
 
     useEffect(() => {
-        if (data) Router.replace('/admin');
-    }, [data]);
+        if (isAuthenticated) Router.replace('/admin');
+    }, [isAuthenticated]);
 
     useEffect(() => {
         if (error?.message.toLowerCase().includes('user')) {
@@ -66,7 +66,9 @@ function Signin() {
         }
     }, [error]);
 
-    const onSubmit = handleSubmit((req) => dispatch(signIn(req)));
+    const onSubmit = handleSubmit((req) => {
+        dispatch(signIn(req));
+    });
 
     return (
         <div className={classes.root}>
@@ -100,9 +102,9 @@ function Signin() {
                             <Link href="/reset">Forgot your password?</Link>
                         </div>
                     </div>
-                    <Button disabled={disabled} type="submit" disableElevation variant="contained" color="primary" fullWidth>
+                    <LoadingButton loading={loading} disabled={disabled} type="submit" disableElevation variant="contained" color="primary" fullWidth>
                         Sign In
-                    </Button>
+                    </LoadingButton>
                 </form>
                 <div className={classes.signin_new_account}>
                     <Typography>New to Fainmi?</Typography>
